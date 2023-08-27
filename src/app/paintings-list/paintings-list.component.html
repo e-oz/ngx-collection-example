@@ -1,0 +1,70 @@
+<a
+  target="_blank"
+  href="https://github.com/e-oz/ngx-collection"
+  mat-raised-button
+  color="primary"
+  class="link"
+  ><mat-icon>source</mat-icon> ngx-collection example app</a
+>
+
+<mat-card class="spinner" *ngIf="coll.$isReading()">
+  <mat-spinner
+    mode="indeterminate"
+    [diameter]="50"
+    color="accent"
+  ></mat-spinner>
+</mat-card>
+
+<mat-accordion>
+  <mat-expansion-panel
+    *ngFor="let item of coll.$items(); trackBy: coll.getTrackByFieldFn('url')"
+  >
+    <mat-expansion-panel-header>
+      <mat-panel-title>{{ item.title }}</mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <ng-template matExpansionPanelContent>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>{{ item.artist }}</mat-card-title>
+          <mat-card-subtitle>{{ item.date }}</mat-card-subtitle>
+        </mat-card-header>
+        <img
+          mat-card-image
+          [src]="item.url"
+          class="frame"
+          [ngClass]="{ mutating: coll.$isMutating() }"
+        />
+      </mat-card>
+    </ng-template>
+
+    <mat-action-row class="actions">
+      <div class="stars" [ngClass]="{ spin: coll.$isUpdating() }">
+        <mat-icon (click)="store.rate({ painting: item, rate: 1 })">{{
+          item.rate ? 'star' : 'star_border'
+        }}</mat-icon>
+        <mat-icon (click)="store.rate({ painting: item, rate: 2 })">{{
+          item.rate && item.rate > 1 ? 'star' : 'star_border'
+        }}</mat-icon>
+        <mat-icon (click)="store.rate({ painting: item, rate: 3 })">{{
+          item.rate && item.rate > 2 ? 'star' : 'star_border'
+        }}</mat-icon>
+        <mat-icon (click)="store.rate({ painting: item, rate: 4 })">{{
+          item.rate && item.rate > 3 ? 'star' : 'star_border'
+        }}</mat-icon>
+        <mat-icon (click)="store.rate({ painting: item, rate: 5 })">{{
+          item.rate && item.rate > 4 ? 'star' : 'star_border'
+        }}</mat-icon>
+      </div>
+
+      <button
+        mat-mini-fab
+        color="warn"
+        [disabled]="coll.$isDeleting()"
+        (click)="store.remove(item)"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>

@@ -1,0 +1,62 @@
+.link {
+  margin: 0.5rem 1rem 2rem;
+  text-decoration: none;
+  display: flex;
+
+  mat-icon {
+    margin: 0 1rem;
+  }
+}
+
+.spinner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5em;
+}
+
+.frame {
+  transition: filter 2s;
+  filter: saturate(1);
+  max-height: 50vh;
+  max-width: 100%;
+  display: flex;
+  align-self: center;
+}
+
+.mutating {
+  transition: filter 2s;
+  filter: saturate(4);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stars {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2;
+
+  &.spin mat-icon {
+    animation: 1s linear 0s infinite spin;
+    opacity: 0.7;
+  }
+
+  mat-icon {
+    cursor: pointer;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
