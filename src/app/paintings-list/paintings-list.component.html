@@ -16,9 +16,8 @@
 </mat-card>
 
 <mat-accordion>
-  <mat-expansion-panel
-    *ngFor="let item of coll.$items(); trackBy: coll.getTrackByFieldFn('url')"
-  >
+  @for(item of coll.$items(); track item.url) {
+  <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>{{ item.title }}</mat-panel-title>
     </mat-expansion-panel-header>
@@ -67,4 +66,5 @@
       </button>
     </mat-action-row>
   </mat-expansion-panel>
+  }
 </mat-accordion>
